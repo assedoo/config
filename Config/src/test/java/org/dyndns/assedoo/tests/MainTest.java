@@ -8,13 +8,26 @@
 package org.dyndns.assedoo.tests;
 
 import org.dyndns.assedoo.config.Config;
-import org.junit.Test;
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
-public class MainTest {
+public class MainTest extends TestCase {
 	
-	@Test
-	public void perform() {
+	public MainTest( String testName )
+    {
+        super( testName );
+    }
+	
+	public static Test suite()
+    {
+        return new TestSuite( MainTest.class );
+    }
+	
+	public void MainTestConfig() {
 		Config.getInstance();
+		
+		assertTrue( true );
 	}
 
 }
