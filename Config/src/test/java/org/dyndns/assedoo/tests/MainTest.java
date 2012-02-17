@@ -8,6 +8,7 @@
 package org.dyndns.assedoo.tests;
 
 import org.dyndns.assedoo.config.Config;
+import org.junit.Test;
 
 public class MainTest {
 	
