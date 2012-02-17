@@ -86,7 +86,25 @@ public final class Config {
 		this.properties = properties;
 		save();
 	}
-
+	
+	/** Add property */
+	
+	public void addProperty (String name) {
+		if (!properties.containsKey(name)) {
+			properties.put(name, null);
+			save();
+		}
+	}
+	
+	/** Add property with value */
+	
+	public void addProperty (String name, String value) {
+		if (!properties.containsKey(name)) {
+			properties.put(name, value);
+			save();
+		}
+	}
+	
 	private boolean createDir (File file) {
 		file.getParentFile().mkdir();
 		return true;
