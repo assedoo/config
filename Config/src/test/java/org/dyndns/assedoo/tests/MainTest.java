@@ -11,6 +11,7 @@ import org.dyndns.assedoo.config.Config;
 
 public class MainTest {
 	
+	@Test
 	public void perform() {
 		Config.getInstance();
 	}
