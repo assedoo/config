@@ -16,121 +16,92 @@ import java.util.Properties;
 
 public final class Config {
 	
-	private static String configPropertiesFileName;
-	private Properties properties;
-	
-	private static Config _instance = null;
-	
-	public Config(String configPropertiesFileName) {
-		if (configPropertiesFileName == null) configPropertiesFileName = "config/config.properties";
-		Config.configPropertiesFileName = configPropertiesFileName;
-		FileInputStream in = null;
-		File configPropertiesFile = new File(configPropertiesFileName);
-		if (properties == null) {
-			properties = new Properties();
-		}
-		try {
-			in = new FileInputStream(configPropertiesFileName);
-		} catch (FileNotFoundException e) {
-			if (!configPropertiesFile.exists()) {
-				if (!createFile(configPropertiesFile)) {
-					if (createDir(configPropertiesFile)) {
-						if (createFile(configPropertiesFile)) {
-							try {
-								in = new FileInputStream(configPropertiesFileName);
-							} catch (FileNotFoundException e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
-							}
-						}
-					}
-				}
-			}
-		}
-		try {
-			properties.load(in);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	
+	private static volatile Config instance;
+	private static String configFileName;
+	private File configFile;
+	private static Properties properties;
+	private static FileInputStream fileInputStream;
+
+	private Config() throws IOException {
+		configFile = new File(configFileName);
+		if (!configFile.exists()) createFile(configFile);
+		fileInputStream = new FileInputStream(configFile);
+		properties = new Properties();
+		properties.load(fileInputStream);	
 	}
 	
-	public static synchronized Config getInstance() {
-		return getInstance(configPropertiesFileName);
+	public static Config getInstance(String configFileName) throws IOException {
+		if (configFileName == null) Config.configFileName = "config/config.properties";
+		else Config.configFileName = configFileName;
+		return initialization();
 	}
 	
-	public static synchronized Config getInstance(String configPropertiesFileName) {
-        if (_instance == null)
-            _instance = new Config(configPropertiesFileName);
-        return _instance;
-    }
+	public static Config getInstance() throws IOException {
+		Config.configFileName = "config/config.properties";
+		return initialization();
+	}
 	
-	/** Get property as an integer */
-	public String getString(String key){
+	public void reload() throws IOException {
+		properties.load(fileInputStream);
+	}
+	
+	public String getString(String key) {
 		return properties.getProperty(key);
 	}
 	
-	/** Set property as an integer */
-	public int getInt(String key){
+	public int getInt(String key) {
 		return Integer.parseInt(getString(key));
 	}
 	
-	/** Get property */
-	public Properties getProperties() {
-		return properties;
+	public void addKey(String key) {
+		properties.put(key, null);
 	}
 	
-	/** Set property */
-	public void setProperties(Properties properties) {
-		this.properties = properties;
-		save();
+	public void addKey(String key, String value) {
+		properties.put(key, value);
 	}
 	
-	/** Add property */
-	
-	public void addProperty (String name) {
-		if (!properties.containsKey(name)) {
-			properties.put(name, null);
-			save();
-		}
+	public void addKey(String key, int value) {
+		properties.put(key, value);
 	}
 	
-	/** Add property with value */
-	
-	public void addProperty (String name, String value) {
-		if (!properties.containsKey(name)) {
-			properties.put(name, value);
-			save();
-		}
-	}
-	
-	private boolean createDir (File file) {
-		file.getParentFile().mkdir();
-		return true;
-	}
-	
-	private boolean createFile (File file) {
+	public void save() throws IOException {
+		FileOutputStream fileOutputStream = null;
 		try {
-			file.createNewFile();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			fileOutputStream = new FileOutputStream(configFile);
+		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-			return false;
 		}
-		return true;
+		properties.store(fileOutputStream, null);
 	}
 	
-	private void save() {
-		FileOutputStream out;
+	private void createFile(File configFile) throws IOException {
+		if (!configFile.getParentFile().exists()) createDirectories(configFile);
+		configFile.createNewFile();
+	}
+	
+	private void createDirectories(File configFile) {
+		configFile.getParentFile().mkdirs();
+	}
+	
+	private static Config initialization() throws IOException {
+		Config localInstance = instance;
+    	if (localInstance == null) {
+    	synchronized (Config.class) {
+                localInstance = instance;
+                if (localInstance == null) {
+                    instance = localInstance = new Config();
+                }
+            }
+        }
+        return localInstance;
+    }
+	
+	protected void finalize() {
 		try {
-			out = new FileOutputStream(configPropertiesFileName);
-			properties.store(out, null);
-			out.close();
+			save();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
 }
