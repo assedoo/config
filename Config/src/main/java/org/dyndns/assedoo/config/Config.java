@@ -27,7 +27,14 @@ public final class Config {
 		if (!configFile.exists()) createFile(configFile);
 		fileInputStream = new FileInputStream(configFile);
 		properties = new Properties();
-		properties.load(fileInputStream);	
+		properties.load(fileInputStream);
+		fileInputStream.close();
+	}
+	
+	/** Get Config instance */
+	public static Config getInstance() throws IOException {
+		Config.configFileName = "config/config.properties";
+		return initialization();
 	}
 	
 	public static Config getInstance(String configFileName) throws IOException {
@@ -36,12 +43,8 @@ public final class Config {
 		return initialization();
 	}
 	
-	public static Config getInstance() throws IOException {
-		Config.configFileName = "config/config.properties";
-		return initialization();
-	}
-	
 	public void reload() throws IOException {
+		fileInputStream = new FileInputStream(configFile);
 		properties.load(fileInputStream);
 	}
 	
@@ -54,7 +57,7 @@ public final class Config {
 	}
 	
 	public void addKey(String key) {
-		properties.put(key, null);
+		properties.put(key, "");
 	}
 	
 	public void addKey(String key, String value) {
@@ -73,6 +76,11 @@ public final class Config {
 			e.printStackTrace();
 		}
 		properties.store(fileOutputStream, null);
+		fileOutputStream.close();
+	}
+	
+	public Properties getProperties() {
+		return properties;
 	}
 	
 	private void createFile(File configFile) throws IOException {

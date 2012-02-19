@@ -7,6 +7,7 @@
 
 package org.dyndns.assedoo.config.tests;
 
+import java.io.File;
 import java.io.IOException;
 
 import org.dyndns.assedoo.config.Config;
@@ -15,12 +16,22 @@ import junit.framework.TestCase;
 
 public class GetInstanceConfigFile extends TestCase {
 	
+	private static final String FILENAME = "config/testconfig.properties";
+	private File file;
+	
+	public void setUp() {
+		
+		file = new File(FILENAME);
+		if(file.exists()) {
+			file.delete();
+		}
+	}
+	
 	public void testGetInstanceConfigFile() throws IOException {
 		
-		Config.getInstance("config/testconfig.properties");
-		
-		assertTrue(true);
-		//assertTrue(Config.getConfigFileName() == "config/testconfig.properties");
+		Config.getInstance(FILENAME);
+
+		assertTrue(file.exists());
 	}
 
 }
