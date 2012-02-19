@@ -14,22 +14,23 @@ import org.dyndns.assedoo.config.Config;
 
 import junit.framework.TestCase;
 
-public class GetInstanceConfigFileNull extends TestCase {
+public class GetInstanceConfigFileTest extends TestCase {
 	
+	private static final String FILENAME = "config/testconfig.properties";
 	private File file;
 	
 	public void setUp() {
 		
-		file = new File("config/config.properties");
+		file = new File(FILENAME);
 		if(file.exists()) {
 			file.delete();
 		}
 	}
 	
-	public void testGetInstanceConfigFileNull() throws IOException {
+	public void testGetInstanceConfigFile() throws IOException {
 		
-		Config.getInstance(null);
-		
+		Config.getInstance(FILENAME);
+
 		assertTrue(file.exists());
 	}
 

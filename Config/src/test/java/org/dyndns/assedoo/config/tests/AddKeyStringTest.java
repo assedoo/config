@@ -14,18 +14,18 @@ import org.dyndns.assedoo.config.Config;
 
 import junit.framework.TestCase;
 
-public class AddKeyInt extends TestCase {
+public class AddKeyStringTest extends TestCase {
 	
 	private static final String KEY = "key";
 	private static final String FILENAME = "config/config.properties";
-	private static final int VALUE = 1;
+	private static final String VALUE = "value";
 	
 	public void setUp() throws IOException {
 	
 		new File(FILENAME).delete();
 	}
 	
-	public void testAddKeyInt() throws IOException {
+	public void testAddKeyString() throws IOException {
 		Config.getInstance().addKey(KEY, VALUE);
 
 		assertTrue(Config.getInstance().getProperties().containsKey(KEY));	

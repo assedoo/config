@@ -16,7 +16,7 @@ import org.dyndns.assedoo.config.Config;
 
 import junit.framework.TestCase;
 
-public class GetProperties extends TestCase {
+public class SaveTest extends TestCase {
 	
 	private static final String KEY = "key";
 	private static final String FILENAME = "config/config.properties";
@@ -29,7 +29,7 @@ public class GetProperties extends TestCase {
 		file.delete();
 	}
 	
-	public void testGetProperties() throws IOException {
+	public void testSave() throws IOException {
 		
 		Config.getInstance().addKey(KEY, VALUE);
 		Config.getInstance().save();
@@ -38,7 +38,7 @@ public class GetProperties extends TestCase {
 		properties.load(fileInputStream);
 		fileInputStream.close();
 		
-		assertTrue(Config.getInstance().getProperties().equals(properties));	
+		assertTrue(properties.containsKey(KEY));	
 		//assertTrue(false);
 		
 	}

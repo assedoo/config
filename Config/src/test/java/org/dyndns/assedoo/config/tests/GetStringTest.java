@@ -13,7 +13,7 @@ import org.dyndns.assedoo.config.Config;
 
 import junit.framework.TestCase;
 
-public class GetString extends TestCase {
+public class GetStringTest extends TestCase {
 	
 	private static final String FILENAME = "config/config.properties";
 	private static final String KEY = "key";

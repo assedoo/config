@@ -7,28 +7,27 @@
 
 package org.dyndns.assedoo.config.tests;
 
-import java.io.File;
 import java.io.IOException;
 
 import org.dyndns.assedoo.config.Config;
 
 import junit.framework.TestCase;
 
-public class AddKeyString extends TestCase {
+public class GetIntTest extends TestCase {
 	
-	private static final String KEY = "key";
 	private static final String FILENAME = "config/config.properties";
-	private static final String VALUE = "value";
+	private static final String KEY = "key";
+	private static final int VALUE = 1;
 	
 	public void setUp() throws IOException {
-	
-		new File(FILENAME).delete();
+		
+		new WriteProperty(FILENAME, KEY + "=" + VALUE);
 	}
 	
-	public void testAddKeyString() throws IOException {
-		Config.getInstance().addKey(KEY, VALUE);
-
-		assertTrue(Config.getInstance().getProperties().containsKey(KEY));	
+	public void testGetInt() throws IOException {
+		
+		System.out.println(Config.getInstance().getString(KEY));
+		assertTrue(Config.getInstance().getInt(KEY) == VALUE);
 	}
 
 }

@@ -1,7 +1,7 @@
 /**
  * @author pzastavny
  * @email pzastavny@lohika.com
- * @date Feb 17, 2012
+ * @date Feb 18, 2012
  *
  */
 
@@ -14,7 +14,7 @@ import org.dyndns.assedoo.config.Config;
 
 import junit.framework.TestCase;
 
-public class GetInstance extends TestCase {
+public class GetInstanceConfigFileNullTest extends TestCase {
 	
 	private File file;
 	
@@ -26,11 +26,11 @@ public class GetInstance extends TestCase {
 		}
 	}
 	
-	public void testGetInstance() throws IOException {
-
-		Config.getInstance();
-
+	public void testGetInstanceConfigFileNull() throws IOException {
+		
+		Config.getInstance(null);
+		
 		assertTrue(file.exists());
 	}
-	
+
 }
