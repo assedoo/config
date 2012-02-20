@@ -122,12 +122,4 @@ public final class Config {
         }
         return localInstance;
     }
-	
-	protected void finalize() {
-		try {
-			save();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
 }
