@@ -11,6 +11,8 @@ import java.io.File;
 import java.io.IOException;
 
 import org.dyndns.assedoo.config.Config;
+import org.junit.Before;
+import org.junit.Test;
 
 import junit.framework.TestCase;
 
@@ -18,6 +20,7 @@ public class GetInstanceConfigFileNullTest extends TestCase {
 	
 	private File file;
 	
+	@Before
 	public void setUp() {
 		
 		file = new File("config/config.properties");
@@ -25,7 +28,8 @@ public class GetInstanceConfigFileNullTest extends TestCase {
 			file.delete();
 		}
 	}
-	
+
+	@Test
 	public void testGetInstanceConfigFileNull() throws IOException {
 		
 		Config.getInstance(null);

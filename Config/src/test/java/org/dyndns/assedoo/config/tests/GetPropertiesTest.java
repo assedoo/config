@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.util.Properties;
 
 import org.dyndns.assedoo.config.Config;
+import org.junit.Before;
+import org.junit.Test;
 
 import junit.framework.TestCase;
 
@@ -23,12 +25,14 @@ public class GetPropertiesTest extends TestCase {
 	private static final String VALUE = "value";
 	private File file;
 	
+	@Before
 	public void setUp() throws IOException {
 		
 		file = new File(FILENAME);
 		file.delete();
 	}
-	
+
+	@Test
 	public void testGetProperties() throws IOException {
 		
 		Config.getInstance().addKey(KEY, VALUE);

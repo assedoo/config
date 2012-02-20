@@ -31,43 +31,60 @@ public final class Config {
 		fileInputStream.close();
 	}
 	
-	/** Get Config instance */
+	/** Get Config instance.
+	 * 	Properties will be read from file: config/config.properties.
+	 */
 	public static Config getInstance() throws IOException {
 		Config.configFileName = "config/config.properties";
 		return initialization();
 	}
-	
+	/** Get Config instance.
+	 * 	Properties will be read from file: configFileName.
+	 */
 	public static Config getInstance(String configFileName) throws IOException {
 		if (configFileName == null) Config.configFileName = "config/config.properties";
 		else Config.configFileName = configFileName;
 		return initialization();
 	}
 	
+	/** Reload properties from file */
 	public void reload() throws IOException {
 		fileInputStream = new FileInputStream(configFile);
 		properties.load(fileInputStream);
 	}
 	
+	/** Get property as an string */
 	public String getString(String key) {
 		return properties.getProperty(key);
 	}
 	
+	/** Get property as an int */
 	public int getInt(String key) {
 		return Integer.parseInt(getString(key));
 	}
 	
+	/** Add key to Properties
+	 *  Note: Use save() method to save changes.
+	 */
 	public void addKey(String key) {
 		properties.put(key, "");
 	}
 	
+	/** Add key to Properties with string value
+	 *  Note: Use save() method to save changes.
+	 */
 	public void addKey(String key, String value) {
 		properties.put(key, value);
 	}
 	
+	/** Add key to Properties with int value
+	 *  Note: Use save() method to save changes.
+	 */
 	public void addKey(String key, int value) {
 		properties.put(key, value);
 	}
 	
+	/** Save changes */
 	public void save() throws IOException {
 		FileOutputStream fileOutputStream = null;
 		try {
@@ -79,6 +96,7 @@ public final class Config {
 		fileOutputStream.close();
 	}
 	
+	/** Get Properties */
 	public Properties getProperties() {
 		return properties;
 	}
