@@ -58,6 +58,12 @@ public final class Config {
 		properties.load(fileInputStream);
 	}
 
+	//TODO Add JUnit test
+	/** Get property as an object */
+	public Object getValue(String key) {
+		return properties.get(key);
+	}
+
 	/** Get property as an string */
 	public String getString(String key) {
 		return properties.getProperty(key);

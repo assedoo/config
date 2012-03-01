@@ -1,6 +1,6 @@
 /**
- * @author pzastavny
- * @email pzastavny@lohika.com
+ * @author assedoo
+ * @email assedoo@gmail.com
  * @date Feb 21, 2012
  *
  */
