@@ -1,36 +1,36 @@
 /**
- * @author assedoo
- * @email assedoo@gmail.com
- * @date Feb 19, 2012
- *
+ * 
  */
-
 package org.dyndns.assedoo.config.tests;
 
-import java.io.File;
+import static org.junit.Assert.*;
+
 import java.io.IOException;
+
 import org.dyndns.assedoo.config.Config;
-import org.junit.Before;
 import org.junit.Test;
 
-import junit.framework.TestCase;
-
-public class AddKeyTest extends TestCase {
+/**
+ * @author assedoo
+ * @email assedoo@gmail.com
+ * @date Aug 27, 2012
+ * @time 11:26:16 AM
+ *
+ */
+public class AddKeyTest extends GeneralTest {
 	
-	private static final String KEY = "key";
-	private static final String FILENAME = "config/config.properties";
-	
-	@Before
-	public void setUp() throws IOException {
-	
-		new File(FILENAME).delete();
-	}
+	private static final String KEY = "AddKeyTest";
 
 	@Test
-	public void testAddKey() throws IOException {
-		Config.getInstance().addKey(KEY);
-		
-		assertTrue(Config.getInstance().getProperties().containsKey(KEY));	
+	public void test() {
+		boolean result = false;
+		try {
+			Config.getInstance().addKey(KEY);
+			result = Config.getInstance().getProperties().containsKey(KEY);
+		} catch (IOException e) {
+			fail(e.getMessage());
+		}		
+		assertTrue(result);
 	}
 
 }

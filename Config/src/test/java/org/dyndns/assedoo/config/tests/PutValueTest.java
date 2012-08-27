@@ -1,38 +1,36 @@
 /**
- * @author assedoo
- * @email assedoo@gmail.com
- * @date Jan 27, 2012
- *
+ * 
  */
-
 package org.dyndns.assedoo.config.tests;
 
-import java.io.File;
+import static org.junit.Assert.*;
+
 import java.io.IOException;
 
-import junit.framework.TestCase;
-
 import org.dyndns.assedoo.config.Config;
-import org.junit.Before;
 import org.junit.Test;
 
-public class PutValueTest extends TestCase {
-	
-	private static final String KEY = "key";
-	private static final String FILENAME = "config/config.properties";
+/**
+ * @author assedoo
+ * @email assedoo@gmail.com
+ * @date Aug 27, 2012
+ * @time 12:50:28 PM
+ *
+ */
+public class PutValueTest extends GeneralTest {
+
+	private static final String KEY = "PutValueTest";
 	private static final Object VALUE = 1;
 	
-	@Before
-	public void setUp() throws IOException {
-	
-		new File(FILENAME).delete();
-	}
-	
 	@Test
-	public void testPutValueObject() throws IOException {
-		Config.getInstance().putValue(KEY, VALUE);
-
-		assertTrue(Config.getInstance().getProperties().containsKey(KEY));	
+	public void test() {
+		boolean result = false;
+		try {
+			Config.getInstance().putValue(KEY, VALUE);
+			result = Config.getInstance().getProperties().containsKey(KEY);
+		} catch (IOException e) {
+			fail(e.getMessage());
+		}	
+		assertTrue(result);
 	}
-
 }

@@ -1,37 +1,42 @@
 /**
- * @author assedoo
- * @email assedoo@gmail.com
- * @date Feb 19, 2012
- *
+ * 
  */
-
 package org.dyndns.assedoo.config.tests;
+
+import static org.junit.Assert.*;
 
 import java.io.IOException;
 
+import org.dyndns.assedoo.config.utils.WriteProperty;
+
 import org.dyndns.assedoo.config.Config;
-import org.junit.Before;
 import org.junit.Test;
 
-import junit.framework.TestCase;
+/**
+ * @author assedoo
+ * @email assedoo@gmail.com
+ * @date Aug 27, 2012
+ * @time 12:39:36 PM
+ *
+ */
+public class GetIntTest extends GeneralTest {
 
-public class GetIntTest extends TestCase {
-	
-	private static final String FILENAME = "config/config.properties";
-	private static final String KEY = "key";
+	private static final String KEY = "GetIntTest";
 	private static final int VALUE = 1;
 	
-	@Before
-	public void setUp() throws IOException {
-		
-		new WriteProperty(FILENAME, KEY + "=" + VALUE);
-	}
-
 	@Test
-	public void testGetInt() throws IOException {
-		
-		System.out.println(Config.getInstance().getString(KEY));
-		assertTrue(Config.getInstance().getInt(KEY) == VALUE);
+	public void test() {
+		boolean result = false;
+		try {
+			new WriteProperty(FILENAME, KEY + "=" + VALUE);
+			if (Config.getInstance().getInt(KEY) == VALUE)
+				result = true;
+			else
+				result = false;
+		} catch (IOException e) {
+			fail(e.getMessage());
+		}
+		assertTrue(result);
 	}
 
 }

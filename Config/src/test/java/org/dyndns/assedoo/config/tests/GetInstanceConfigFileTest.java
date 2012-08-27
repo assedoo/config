@@ -1,40 +1,43 @@
 /**
- * @author assedoo
- * @email assedoo@gmail.com
- * @date Feb 18, 2012
- *
+ * 
  */
-
 package org.dyndns.assedoo.config.tests;
+
+import static org.junit.Assert.*;
 
 import java.io.File;
 import java.io.IOException;
 
 import org.dyndns.assedoo.config.Config;
-import org.junit.Before;
+import org.dyndns.assedoo.config.utils.FileUtils;
+import org.junit.After;
 import org.junit.Test;
 
-import junit.framework.TestCase;
-
-public class GetInstanceConfigFileTest extends TestCase {
+/**
+ * @author assedoo
+ * @email assedoo@gmail.com
+ * @date Aug 27, 2012
+ * @time 11:36:37 AM
+ *
+ */
+public class GetInstanceConfigFileTest extends GeneralTest {
 	
-	private static final String FILENAME = "config/testconfig.properties";
-	private File file;
+	protected static final String TESTFILENAME = "config/testconfig.properties";
 	
-	@Before
-	public void setUp() {
-		
-		file = new File(FILENAME);
-		if(file.exists()) {
-			file.delete();
-		}
+	@After
+	public void tearDown() {
+		Config.unSet();
+		FileUtils.deleteEntity(TESTFILENAME, true);
 	}
-
+	
 	@Test
-	public void testGetInstanceConfigFile() throws IOException {
-		
-		Config.getInstance(FILENAME);
-
+	public void test() {
+		File file = new File (TESTFILENAME);
+		try {
+			Config.getInstance(TESTFILENAME);
+		} catch (IOException e) {
+			fail(e.getMessage());
+		}
 		assertTrue(file.exists());
 	}
 

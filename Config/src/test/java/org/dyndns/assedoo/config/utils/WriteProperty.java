@@ -5,7 +5,7 @@
  *
  */
 
-package org.dyndns.assedoo.config.tests;
+package org.dyndns.assedoo.config.utils;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -18,6 +18,8 @@ public class WriteProperty {
 		
 		File file = new File(fileName);
 		file.delete();
+		if (!file.getParentFile().exists())
+			file.getParentFile().mkdirs();
 		file.createNewFile();
 		FileWriter fstream = new FileWriter(fileName);
 		BufferedWriter out = new BufferedWriter(fstream);

@@ -1,39 +1,43 @@
 /**
- * @author assedoo
- * @email assedoo@gmail.com
- * @date Jan 27, 2012
- *
+ * 
  */
-
 package org.dyndns.assedoo.config.tests;
+
+import static org.junit.Assert.*;
 
 import java.io.IOException;
 
 import org.dyndns.assedoo.config.Config;
-import org.junit.Before;
+import org.dyndns.assedoo.config.utils.WriteProperty;
+
 import org.junit.Test;
 
-import junit.framework.TestCase;
+/**
+ * @author assedoo
+ * @email assedoo@gmail.com
+ * @date Aug 27, 2012
+ * @time 12:52:47 PM
+ *
+ */
+public class ReloadTest extends GeneralTest {
 
-public class ReloadTest extends TestCase {
-	
-	private static final String FILENAME = "config/config.properties";
-	private static final String KEY = "key";
+	private static final String KEY = "ReloadTest";
 	private static final String VALUE1 = "value1";
 	private static final String VALUE2 = "value2";
 	
-	@Before
-	public void setUp() throws IOException {
-		
-		new WriteProperty(FILENAME, KEY + "=" + VALUE1);
-	}
-
 	@Test
-	public void testReload() throws IOException {
-		
-		Config.getInstance();
-		new WriteProperty(FILENAME, KEY + "=" + VALUE2);
-		Config.getInstance().reload();
-		assertTrue(Config.getInstance().getString(KEY).equals(VALUE2));
+	public void test() {
+		boolean result = false;
+		try {
+			new WriteProperty(FILENAME, KEY + "=" + VALUE1);
+			Config.getInstance();
+			new WriteProperty(FILENAME, KEY + "=" + VALUE2);
+			Config.getInstance().reload();		
+			result = Config.getInstance().getString(KEY).equals(VALUE2);
+		} catch (IOException e) {
+			e.printStackTrace();
+			fail(e.getMessage());
+		}
+		assertTrue(result);
 	}
 }

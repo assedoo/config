@@ -149,4 +149,8 @@ public final class Config {
 		}
 		return localInstance;
 	}
+	
+	public static void unSet() {
+		instance = null;
+	}
 }
