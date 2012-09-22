@@ -126,6 +126,10 @@ public final class Config {
 	public void putValue(String key, Object value) {
 		properties.put(key, value);
 	}
+	
+	public void setProperties(Properties properties) {
+		Config.properties = properties;
+	}
 
 	private void createFile(File configFile) throws IOException {
 		if (!configFile.getParentFile().exists())
