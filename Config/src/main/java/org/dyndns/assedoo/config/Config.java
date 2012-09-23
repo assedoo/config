@@ -116,6 +116,18 @@ public final class Config {
 		properties.store(fileOutputStream, null);
 		fileOutputStream.close();
 	}
+	
+	/** Save changes with comments*/
+	public void save(String comments) throws IOException {
+		FileOutputStream fileOutputStream = null;
+		try {
+			fileOutputStream = new FileOutputStream(configFile);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		properties.store(fileOutputStream, comments);
+		fileOutputStream.close();
+	}
 
 	/** Get Properties */
 	public Properties getProperties() {
@@ -126,7 +138,7 @@ public final class Config {
 	public void putValue(String key, Object value) {
 		properties.put(key, value);
 	}
-	
+	/** Set Properties */
 	public void setProperties(Properties properties) {
 		Config.properties = properties;
 	}

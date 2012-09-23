@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.dyndns.assedoo</groupId>
 	<artifactId>Config</artifactId>
-	<version>0.1</version>
+	<version>0.2</version>
 	<name>Config</name>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
