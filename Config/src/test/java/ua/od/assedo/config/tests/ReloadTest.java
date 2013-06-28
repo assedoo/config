@@ -1,14 +1,14 @@
 /**
  * 
  */
-package org.dyndns.assedoo.config.tests;
+package ua.od.assedo.config.tests;
 
 import static org.junit.Assert.*;
 
 import java.io.IOException;
 
-import org.dyndns.assedoo.config.Config;
-import org.dyndns.assedoo.config.utils.WriteProperty;
+import ua.od.assedo.config.Config;
+import ua.od.assedo.config.utils.WriteProperty;
 
 import org.junit.Test;
 

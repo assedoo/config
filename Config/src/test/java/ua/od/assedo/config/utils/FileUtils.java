@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.dyndns.assedoo.config.utils;
+package ua.od.assedo.config.utils;
 
 import java.io.File;
 

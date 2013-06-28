@@ -1,10 +1,10 @@
 /**
  * 
  */
-package org.dyndns.assedoo.config.tests;
+package ua.od.assedo.config.tests;
 
-import org.dyndns.assedoo.config.Config;
-import org.dyndns.assedoo.config.utils.FileUtils;
+import ua.od.assedo.config.Config;
+import ua.od.assedo.config.utils.FileUtils;
 import org.junit.After;
 
 /**

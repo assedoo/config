@@ -1,18 +1,16 @@
 /**
  * 
  */
-package org.dyndns.assedoo.config.tests;
+package ua.od.assedo.config.tests;
 
 import static org.junit.Assert.*;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Properties;
 
-import org.dyndns.assedoo.config.Config;
+import ua.od.assedo.config.Config;
 import org.junit.Test;
 
 /**
@@ -37,7 +35,7 @@ public class SaveWithCommentsTest extends GeneralTest {
 			Config.getInstance().save(COMMENTS);
 			FileReader fileReader = new FileReader(file);
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
-			String line = null;
+			String line;
 			while ((line = bufferedReader.readLine()) != null) {
 				if (line.contains(COMMENTS)) {
 					result = true;
